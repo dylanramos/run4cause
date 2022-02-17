@@ -11,8 +11,8 @@ using run4cause.Data;
 namespace run4cause.Migrations
 {
     [DbContext(typeof(Run4causeContext))]
-    [Migration("20220217090651_CreateCourses")]
-    partial class CreateCourses
+    [Migration("20220217090651_CreateRuns")]
+    partial class CreateRuns
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,7 +23,7 @@ namespace run4cause.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("run4cause.Models.Course", b =>
+            modelBuilder.Entity("run4cause.Models.Run", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -39,7 +39,7 @@ namespace run4cause.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Course");
+                    b.ToTable("Run");
                 });
 
             modelBuilder.Entity("run4cause.Models.Participant", b =>

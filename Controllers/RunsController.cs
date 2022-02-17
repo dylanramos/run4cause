@@ -11,22 +11,22 @@ using run4cause.Models;
 
 namespace run4cause.Controllers
 {
-    public class CoursesController : Controller
+    public class RunsController : Controller
     {
         private readonly Run4causeContext _context;
 
-        public CoursesController(Run4causeContext context)
+        public RunsController(Run4causeContext context)
         {
             _context = context;
         }
 
-        // GET: Courses
+        // GET: Runs
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Course.ToListAsync());
+            return View(await _context.Run.ToListAsync());
         }
 
-        // GET: Courses/Details/5
+        // GET: Runs/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,39 +34,39 @@ namespace run4cause.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Course
+            var run = await _context.Run
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (course == null)
+            if (run == null)
             {
                 return NotFound();
             }
 
-            return View(course);
+            return View(run);
         }
 
-        // GET: Courses/Create
+        // GET: Runs/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Courses/Create
+        // POST: Runs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Description")] Course course)
+        public async Task<IActionResult> Create([Bind("Id,Title,Description")] Run run)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(course);
+                _context.Add(run);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(course);
+            return View(run);
         }
 
-        // GET: Courses/Edit/5
+        // GET: Runs/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -74,22 +74,22 @@ namespace run4cause.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Course.FindAsync(id);
-            if (course == null)
+            var run = await _context.Run.FindAsync(id);
+            if (run == null)
             {
                 return NotFound();
             }
-            return View(course);
+            return View(run);
         }
 
-        // POST: Courses/Edit/5
+        // POST: Runs/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description")] Course course)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description")] Run run)
         {
-            if (id != course.Id)
+            if (id != run.Id)
             {
                 return NotFound();
             }
@@ -98,12 +98,12 @@ namespace run4cause.Controllers
             {
                 try
                 {
-                    _context.Update(course);
+                    _context.Update(run);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CourseExists(course.Id))
+                    if (!RunExists(run.Id))
                     {
                         return NotFound();
                     }
@@ -114,10 +114,10 @@ namespace run4cause.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(course);
+            return View(run);
         }
 
-        // GET: Courses/Delete/5
+        // GET: Runs/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -125,30 +125,30 @@ namespace run4cause.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Course
+            var run = await _context.Run
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (course == null)
+            if (run == null)
             {
                 return NotFound();
             }
 
-            return View(course);
+            return View(run);
         }
 
-        // POST: Courses/Delete/5
+        // POST: Runs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var course = await _context.Course.FindAsync(id);
-            _context.Course.Remove(course);
+            var run = await _context.Run.FindAsync(id);
+            _context.Run.Remove(run);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CourseExists(int id)
+        private bool RunExists(int id)
         {
-            return _context.Course.Any(e => e.Id == id);
+            return _context.Run.Any(e => e.Id == id);
         }
     }
 }

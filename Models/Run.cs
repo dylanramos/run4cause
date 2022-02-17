@@ -2,7 +2,7 @@
 
 namespace run4cause.Models
 {
-    public class Course
+    public class Run
     {
         public int Id { get; set; }
 

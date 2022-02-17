@@ -44,24 +44,24 @@ namespace run4cause.Models
                     );
                 }
 
-                // Courses
-                if (!context.Course.Any())
+                // Runs
+                if (!context.Run.Any())
                 {
-                    context.Course.AddRange(
-                        new Course
+                    context.Run.AddRange(
+                        new Run
                         {
-                            Title = "Course1",
-                            Description = "Course1 descritpion"
+                            Title = "Run1",
+                            Description = "Run1 descritpion"
                         },
-                        new Course
+                        new Run
                         {
-                            Title = "Course2",
-                            Description = "Course2 descritpion"
+                            Title = "Run2",
+                            Description = "Run2 descritpion"
                         },
-                        new Course
+                        new Run
                         {
-                            Title = "Course3",
-                            Description = "Course3 descritpion"
+                            Title = "Run3",
+                            Description = "Run3 descritpion"
                         }
                     );
                 }
