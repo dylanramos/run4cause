@@ -14,37 +14,58 @@ namespace run4cause.Models
                 serviceProvider.GetRequiredService<
                     DbContextOptions<Run4causeContext>>()))
             {
-                // Look for any Participants.
-                if (context.Participant.Any())
+                // Participants
+                if (!context.Participant.Any())
                 {
-                    return;   // DB has been seeded
+                    context.Participant.AddRange(
+                        new Participant
+                        {
+                            LastName = "Bob",
+                            FirstName = "Le bricoleur"
+                        },
+
+                        new Participant
+                        {
+                            LastName = "Jack",
+                            FirstName = "Le beau"
+                        },
+
+                        new Participant
+                        {
+                            LastName = "Marie",
+                            FirstName = "La belle"
+                        },
+
+                        new Participant
+                        {
+                            LastName = "John",
+                            FirstName = "Lenon"
+                        }
+                    );
                 }
 
-                context.Participant.AddRange(
-                    new Participant
-                    {
-                        LastName = "Bob",
-                        FirstName = "Le bricoleur"
-                    },
-
-                    new Participant
-                    {
-                        LastName = "Jack",
-                        FirstName = "Le beau"
-                    },
-
-                    new Participant
-                    {
-                        LastName = "Marie",
-                        FirstName = "La belle"
-                    },
-
-                    new Participant
-                    {
-                        LastName = "John",
-                        FirstName = "Lenon"
-                    }
-                );
+                // Courses
+                if (!context.Course.Any())
+                {
+                    context.Course.AddRange(
+                        new Course
+                        {
+                            Title = "Course1",
+                            Description = "Course1 descritpion"
+                        },
+                        new Course
+                        {
+                            Title = "Course2",
+                            Description = "Course2 descritpion"
+                        },
+                        new Course
+                        {
+                            Title = "Course3",
+                            Description = "Course3 descritpion"
+                        }
+                    );
+                }
+                
                 context.SaveChanges();
             }
         }

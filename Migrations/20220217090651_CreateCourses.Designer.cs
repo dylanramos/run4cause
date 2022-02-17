@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using run4cause.Data;
 
@@ -10,9 +11,10 @@ using run4cause.Data;
 namespace run4cause.Migrations
 {
     [DbContext(typeof(Run4causeContext))]
-    partial class Run4causeContextModelSnapshot : ModelSnapshot
+    [Migration("20220217090651_CreateCourses")]
+    partial class CreateCourses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
