@@ -10,9 +10,9 @@ namespace run4cause.Models
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            using (var context = new run4causeContext(
+            using (var context = new Run4causeContext(
                 serviceProvider.GetRequiredService<
-                    DbContextOptions<run4causeContext>>()))
+                    DbContextOptions<Run4causeContext>>()))
             {
                 // Look for any Participants.
                 if (context.Participant.Any())

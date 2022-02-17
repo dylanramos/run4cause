@@ -9,8 +9,8 @@ using run4cause.Data;
 
 namespace run4cause.Migrations
 {
-    [DbContext(typeof(run4causeContext))]
-    partial class run4causeContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(Run4causeContext))]
+    partial class Run4causeContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

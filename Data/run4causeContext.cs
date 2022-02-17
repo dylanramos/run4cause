@@ -8,9 +8,9 @@ using run4cause.Models;
 
 namespace run4cause.Data
 {
-    public class run4causeContext : DbContext
+    public class Run4causeContext : DbContext
     {
-        public run4causeContext (DbContextOptions<run4causeContext> options)
+        public Run4causeContext (DbContextOptions<Run4causeContext> options)
             : base(options)
         {
         }

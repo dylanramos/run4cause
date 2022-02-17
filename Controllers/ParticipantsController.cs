@@ -11,11 +11,11 @@ using run4cause.Models;
 
 namespace run4cause.Controllers
 {
-    public class ParticipantController : Controller
+    public class ParticipantsController : Controller
     {
-        private readonly run4causeContext _context;
+        private readonly Run4causeContext _context;
 
-        public ParticipantController(run4causeContext context)
+        public ParticipantsController(Run4causeContext context)
         {
             _context = context;
         }

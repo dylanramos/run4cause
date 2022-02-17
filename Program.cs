@@ -2,10 +2,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using run4cause.Data;
 using run4cause.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<run4causeContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("run4causeContext")));
+builder.Services.AddDbContext<Run4causeContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Run4causeContext")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

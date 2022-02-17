@@ -10,7 +10,7 @@ using run4cause.Data;
 
 namespace run4cause.Migrations
 {
-    [DbContext(typeof(run4causeContext))]
+    [DbContext(typeof(Run4causeContext))]
     [Migration("20220210130918_InitialCreate")]
     partial class InitialCreate
     {
