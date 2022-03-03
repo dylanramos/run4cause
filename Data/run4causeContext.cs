@@ -18,5 +18,7 @@ namespace run4cause.Data
         public DbSet<run4cause.Models.Participant> Participant { get; set; }
 
         public DbSet<run4cause.Models.Run> Run { get; set; }
+
+        public DbSet<run4cause.Models.Participation> Participation { get; set; }
     }
 }

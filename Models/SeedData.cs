@@ -20,26 +20,26 @@ namespace run4cause.Models
                     context.Participant.AddRange(
                         new Participant
                         {
-                            LastName = "Bob",
-                            FirstName = "Le bricoleur"
+                            FirstName = "Bob",
+                            LastName = "Le bricoleur",  
                         },
 
                         new Participant
                         {
-                            LastName = "Jack",
-                            FirstName = "Le beau"
+                            FirstName = "Jack",
+                            LastName = "Le beau",
                         },
 
                         new Participant
                         {
-                            LastName = "Marie",
-                            FirstName = "La belle"
+                            FirstName = "Marie",
+                            LastName = "La belle",
                         },
 
                         new Participant
                         {
-                            LastName = "John",
-                            FirstName = "Lenon"
+                            FirstName = "John",
+                            LastName = "Lenon",
                         }
                     );
                 }
