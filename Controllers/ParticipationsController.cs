@@ -23,7 +23,11 @@ namespace run4cause.Controllers
         // GET: Participations
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Participation.ToListAsync());
+            var participations = _context.Participation
+                .Include(p => p.Participant)
+                .Include(r => r.Run)
+                .AsNoTracking();
+            return View(await participations.ToListAsync());
         }
 
         // GET: Participations/Details/5
@@ -35,6 +39,8 @@ namespace run4cause.Controllers
             }
 
             var participation = await _context.Participation
+                .Include(c => c.Participant)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (participation == null)
             {
@@ -45,10 +51,9 @@ namespace run4cause.Controllers
         }
 
         // GET: Participations/Create
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
-            ViewData["Participants"] = await _context.Participant.ToListAsync();
-
+            PopulateParticipantsDropDownList();
             return View();
         }
 
@@ -57,7 +62,7 @@ namespace run4cause.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,DateTime")] Participation participation)
+        public async Task<IActionResult> Create([Bind("Id,DateTime,ParticipantID,Run")] Participation participation)
         {
             if (ModelState.IsValid)
             {
@@ -65,6 +70,7 @@ namespace run4cause.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            PopulateParticipantsDropDownList(participation.Id);
             return View(participation);
         }
 
@@ -117,6 +123,14 @@ namespace run4cause.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(participation);
+        }
+
+        private void PopulateParticipantsDropDownList(object selectedParticipant = null)
+        {
+            var participantsQuery = from participant in _context.Participant
+                                    orderby participant.LastName
+                                    select participant;
+            ViewBag.ParticipantID = new SelectList(participantsQuery.AsNoTracking(), "ParticipantID", "LastName", selectedParticipant);
         }
 
         // GET: Participations/Delete/5

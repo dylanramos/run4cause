@@ -11,5 +11,12 @@ namespace run4cause.Models
 
         [DisplayName("Firstname")]
         public string? FirstName { get; set; }
+
+        public string FullName
+        {
+            get { return $"{FirstName} {LastName}"; }
+        }
+
+        public ICollection<Participation>? Participations { get; set; }
     }
 }

@@ -2,19 +2,6 @@
 
 @{
     ViewData["Title"] = "Create";
-
-    IEnumerable<Participant> participants = ViewData["Participants"] as IEnumerable<Participant>;
-
-    // Populate participants list
-    List<SelectListItem> listItems = new List<SelectListItem>();
-    foreach (var participant in participants)
-    {
-        listItems.Add(new SelectListItem
-        {
-            Text = $"{participant.FirstName} {participant.LastName}",
-            Value = participant.Id.ToString(),
-        });
-    }
 }
 
 <h1>Create</h1>
@@ -25,8 +12,17 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">       
+                <label asp-for="Participant" class="control-label"></label>
+                <select asp-for="ParticipantID" asp-items="ViewBag.ParticipantID" class="form-control">
+                    <option value="">-- Select Participant --</option>
+                </select>
+                <span asp-validation-for="Participant" class="text-danger"></span>
+            </div>
             <div class="form-group">             
-                @Html.DropDownList("Participants", listItems)
+                <label asp-for="Run" class="control-label"></label>
+                <select asp-for="Run" class="form-control" name="Run"></select>
+                <span asp-validation-for="Run" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DateTime" class="control-label"></label>

@@ -52,17 +52,17 @@ namespace run4cause.Migrations
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ParticipantId")
+                    b.Property<int>("ParticipantID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("RunId")
+                    b.Property<int>("RunID")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ParticipantId");
+                    b.HasIndex("ParticipantID");
 
-                    b.HasIndex("RunId");
+                    b.HasIndex("RunID");
 
                     b.ToTable("Participation");
                 });
@@ -89,16 +89,25 @@ namespace run4cause.Migrations
             modelBuilder.Entity("run4cause.Models.Participation", b =>
                 {
                     b.HasOne("run4cause.Models.Participant", "Participant")
-                        .WithMany()
-                        .HasForeignKey("ParticipantId");
+                        .WithMany("Participations")
+                        .HasForeignKey("ParticipantID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("run4cause.Models.Run", "Run")
                         .WithMany()
-                        .HasForeignKey("RunId");
+                        .HasForeignKey("RunID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Participant");
 
                     b.Navigation("Run");
+                });
+
+            modelBuilder.Entity("run4cause.Models.Participant", b =>
+                {
+                    b.Navigation("Participations");
                 });
 #pragma warning restore 612, 618
         }
