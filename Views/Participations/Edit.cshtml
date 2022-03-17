@@ -13,6 +13,20 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
+            <div class="form-group">       
+                <label asp-for="Participant" class="control-label"></label>
+                <select asp-for="ParticipantID" asp-items="ViewBag.Participants" class="form-control">
+                    <option value="">-- Select Participant --</option>
+                </select>
+                <span asp-validation-for="ParticipantID" class="text-danger"></span>
+            </div>
+            <div class="form-group">             
+                <label asp-for="Run" class="control-label"></label>
+                <select asp-for="RunID" asp-items="ViewBag.Runs" class="form-control">
+                    <option value="">-- Select Run --</option>
+                </select>
+                <span asp-validation-for="RunID" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="DateTime" class="control-label"></label>
                 <input asp-for="DateTime" class="form-control" />

@@ -39,7 +39,8 @@ namespace run4cause.Controllers
             }
 
             var participation = await _context.Participation
-                .Include(c => c.Participant)
+                .Include(p => p.Participant)
+                .Include(r => r.Run)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (participation == null)
@@ -54,6 +55,7 @@ namespace run4cause.Controllers
         public IActionResult Create()
         {
             PopulateParticipantsDropDownList();
+            PopulateRunsDropDownList();
             return View();
         }
 
@@ -62,7 +64,7 @@ namespace run4cause.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,DateTime,ParticipantID,Run")] Participation participation)
+        public async Task<IActionResult> Create([Bind("Id,DateTime,ParticipantID,RunID")] Participation participation)
         {
             if (ModelState.IsValid)
             {
@@ -70,7 +72,6 @@ namespace run4cause.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            PopulateParticipantsDropDownList(participation.Id);
             return View(participation);
         }
 
@@ -87,6 +88,9 @@ namespace run4cause.Controllers
             {
                 return NotFound();
             }
+            PopulateParticipantsDropDownList(participation.ParticipantID);
+            PopulateRunsDropDownList(participation.RunID);
+
             return View(participation);
         }
 
@@ -95,7 +99,7 @@ namespace run4cause.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,DateTime")] Participation participation)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,DateTime,ParticipantID,RunID")] Participation participation)
         {
             if (id != participation.Id)
             {
@@ -127,10 +131,12 @@ namespace run4cause.Controllers
 
         private void PopulateParticipantsDropDownList(object selectedParticipant = null)
         {
-            var participantsQuery = from participant in _context.Participant
-                                    orderby participant.LastName
-                                    select participant;
-            ViewBag.ParticipantID = new SelectList(participantsQuery.AsNoTracking(), "ParticipantID", "LastName", selectedParticipant);
+            ViewBag.Participants = new SelectList(_context.Participant.AsNoTracking(), "Id", "FullName", selectedParticipant);
+        }
+
+        private void PopulateRunsDropDownList(object selectedRun = null)
+        {
+            ViewBag.Runs = new SelectList(_context.Run.AsNoTracking(), "Id", "Title", selectedRun);
         }
 
         // GET: Participations/Delete/5
@@ -142,6 +148,9 @@ namespace run4cause.Controllers
             }
 
             var participation = await _context.Participation
+                .Include(p => p.Participant)
+                .Include(r => r.Run)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (participation == null)
             {
