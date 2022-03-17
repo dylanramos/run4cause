@@ -22,10 +22,10 @@ namespace run4cause.Models
 
                 var participants = new Participant[]
                 {
-                    new Participant { FirstName = "Bob", LastName = "Le bricoleur"},
-                    new Participant { FirstName = "Jack", LastName = "Le beau"},
-                    new Participant { FirstName = "Marie", LastName = "La belle"},
-                    new Participant { FirstName = "John", LastName = "Lenon"}
+                    new Participant { FirstName = "Bob", LastName = "Le bricoleur", Nickname = "THEBOB"},
+                    new Participant { FirstName = "Jack", LastName = "Le beau", Nickname = "THEJACK"},
+                    new Participant { FirstName = "Marie", LastName = "La belle", Nickname = "THEMARIE"},
+                    new Participant { FirstName = "John", LastName = "Lenon", Nickname = "THEJOHN"}
                 };
 
                 foreach (Participant participant in participants)

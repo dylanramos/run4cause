@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace run4cause.Models
 {
@@ -6,16 +7,28 @@ namespace run4cause.Models
     {
         public int Id { get; set; }
 
+        [Required]
+        [StringLength(25, MinimumLength = 3)]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$")]
         [DisplayName("Lastname")]
         public string? LastName { get; set; }
 
+        [Required]
+        [StringLength(15, MinimumLength = 3)]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$")]
         [DisplayName("Firstname")]
         public string? FirstName { get; set; }
+
+        [Required]
+        [StringLength(15, MinimumLength = 3)]
+        [DisplayName("Nickname")]
+        public string? Nickname { get; set; }
 
         public string FullName
         {
             get { return $"{FirstName} {LastName}"; }
         }
+
 
         public ICollection<Participation>? Participations { get; set; }
     }

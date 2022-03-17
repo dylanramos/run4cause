@@ -64,10 +64,11 @@ namespace run4cause.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,DateTime,ParticipantID,RunID")] Participation participation)
+        public async Task<IActionResult> Create([Bind("Id,ParticipantID,RunID")] Participation participation)
         {
             if (ModelState.IsValid)
             {
+                participation.DateTime = DateTime.Now;
                 _context.Add(participation);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -99,7 +100,7 @@ namespace run4cause.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,DateTime,ParticipantID,RunID")] Participation participation)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ParticipantID,RunID")] Participation participation)
         {
             if (id != participation.Id)
             {
@@ -110,6 +111,7 @@ namespace run4cause.Controllers
             {
                 try
                 {
+                    participation.DateTime = DateTime.Now;
                     _context.Update(participation);
                     await _context.SaveChangesAsync();
                 }
