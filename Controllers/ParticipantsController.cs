@@ -55,7 +55,7 @@ namespace run4cause.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,LastName,FirstName")] Participant participant)
+        public async Task<IActionResult> Create([Bind("Id,LastName,FirstName,Nickname,BibNumber")] Participant participant)
         {
             if (ModelState.IsValid)
             {

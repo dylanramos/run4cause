@@ -29,6 +29,10 @@ namespace run4cause.Models
             get { return $"{FirstName} {LastName}"; }
         }
 
+        [Required]
+        [Range(1, 100)]
+        [DisplayName("Bib number")]
+        public int BibNumber { get; set; }
 
         public ICollection<Participation>? Participations { get; set; }
     }
