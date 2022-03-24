@@ -26,6 +26,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.BibNumber)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsHandicapped)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -43,6 +46,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BibNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsHandicapped)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

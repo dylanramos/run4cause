@@ -34,6 +34,9 @@ namespace run4cause.Models
         [DisplayName("Bib number")]
         public int BibNumber { get; set; }
 
+        [DisplayName("Handicapped")]
+        public bool IsHandicapped { get; set; }
+
         public ICollection<Participation>? Participations { get; set; }
     }
 }
