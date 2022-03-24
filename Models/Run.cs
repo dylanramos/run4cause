@@ -13,7 +13,7 @@ namespace run4cause.Models
         public string? Title { get; set; }
 
         [Required]
-        [StringLength(25, MinimumLength = 3)]
+        [DataType(DataType.MultilineText)]
         [DisplayName("Description")]
         public string? Description { get; set; }
     }

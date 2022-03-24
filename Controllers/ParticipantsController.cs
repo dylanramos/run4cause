@@ -55,7 +55,7 @@ namespace run4cause.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,LastName,FirstName,Nickname,BibNumber,IsHandicapped")] Participant participant)
+        public async Task<IActionResult> Create([Bind("Id,LastName,FirstName,Nickname,BibNumber,IsHandicapped,Gender")] Participant participant)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +87,7 @@ namespace run4cause.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,LastName,FirstName,Nickname")] Participant participant)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,LastName,FirstName,Nickname,BibNumber,IsHandicapped,Gender")] Participant participant)
         {
             if (id != participant.Id)
             {

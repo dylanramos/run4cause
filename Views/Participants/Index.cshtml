@@ -29,6 +29,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.IsHandicapped)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -49,6 +52,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IsHandicapped)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

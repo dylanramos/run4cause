@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -36,6 +37,10 @@ namespace run4cause.Models
 
         [DisplayName("Handicapped")]
         public bool IsHandicapped { get; set; }
+
+        [Required]
+        [DisplayName("Gender")]
+        public string Gender { get; set; }
 
         public ICollection<Participation>? Participations { get; set; }
     }
