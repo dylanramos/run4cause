@@ -61,15 +61,7 @@ namespace run4cause.Controllers
         {
             if (ModelState.IsValid)
             {
-                string wwwRootPath = _hostEnvironment.WebRootPath;
-                string fileName = Path.GetFileNameWithoutExtension(participant.Picture.FileName);
-                string extension = Path.GetExtension(participant.Picture.FileName);
-                participant.PictureName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                string path = Path.Combine(wwwRootPath + "/images/", fileName);
-                using (var fileStream = new FileStream(path, FileMode.Create))
-                {
-                    await participant.Picture.CopyToAsync(fileStream);
-                }
+                StoreFile(participant);
 
                 _context.Add(participant);
                 await _context.SaveChangesAsync();
@@ -110,15 +102,7 @@ namespace run4cause.Controllers
             {
                 try
                 {
-                    string wwwRootPath = _hostEnvironment.WebRootPath;
-                    string fileName = Path.GetFileNameWithoutExtension(participant.Picture.FileName);
-                    string extension = Path.GetExtension(participant.Picture.FileName);
-                    participant.PictureName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                    string path = Path.Combine(wwwRootPath + "/images/", fileName);
-                    using (var fileStream = new FileStream(path, FileMode.Create))
-                    {
-                        await participant.Picture.CopyToAsync(fileStream);
-                    }
+                    StoreFile(participant);
 
                     _context.Update(participant);
                     await _context.SaveChangesAsync();
@@ -171,6 +155,19 @@ namespace run4cause.Controllers
         private bool ParticipantExists(int id)
         {
             return _context.Participant.Any(e => e.Id == id);
+        }
+
+        private async void StoreFile(Participant participant)
+        {
+            string wwwRootPath = _hostEnvironment.WebRootPath;
+            string fileName = Path.GetFileNameWithoutExtension(participant.Picture.FileName);
+            string extension = Path.GetExtension(participant.Picture.FileName);
+            participant.PictureName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+            string path = Path.Combine(wwwRootPath + "/images/", fileName);
+            using (var fileStream = new FileStream(path, FileMode.Create))
+            {
+                await participant.Picture.CopyToAsync(fileStream);
+            }
         }
     }
 }
