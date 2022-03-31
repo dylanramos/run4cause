@@ -99,7 +99,7 @@ namespace run4cause.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,LastName,FirstName,Nickname,BibNumber,IsHandicapped,Gender")] Participant participant)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,LastName,FirstName,Nickname,BibNumber,IsHandicapped,Gender,Picture,PictureName")] Participant participant)
         {
             if (id != participant.Id)
             {
@@ -110,6 +110,16 @@ namespace run4cause.Controllers
             {
                 try
                 {
+                    string wwwRootPath = _hostEnvironment.WebRootPath;
+                    string fileName = Path.GetFileNameWithoutExtension(participant.Picture.FileName);
+                    string extension = Path.GetExtension(participant.Picture.FileName);
+                    participant.PictureName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    string path = Path.Combine(wwwRootPath + "/images/", fileName);
+                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        await participant.Picture.CopyToAsync(fileStream);
+                    }
+
                     _context.Update(participant);
                     await _context.SaveChangesAsync();
                 }

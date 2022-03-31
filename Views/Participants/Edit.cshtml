@@ -9,7 +9,18 @@
 <h4>Participant</h4>
 <hr />
 
-<partial name="_ParticipantForm" />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <partial name="_ParticipantForm" />
+                <div class="form-group">
+                    <br />
+                    <input type="submit" value="Edit" class="btn btn-primary" />
+                </div>
+        </form>
+    </div>
+</div>
 
 <div>
     <a asp-action="Index">Back to List</a>
