@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace run4cause.Models
 {
@@ -41,6 +42,13 @@ namespace run4cause.Models
         [Required]
         [DisplayName("Gender")]
         public string Gender { get; set; }
+
+        [NotMapped]
+        [DisplayName("Profile picture")]
+        [DataType(DataType.Upload)]
+        public IFormFile Picture { get; set; }
+
+        public string PictureName { get; set; }
 
         public ICollection<Participation>? Participations { get; set; }
     }

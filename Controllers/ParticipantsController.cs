@@ -14,10 +14,12 @@ namespace run4cause.Controllers
     public class ParticipantsController : Controller
     {
         private readonly Run4causeContext _context;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public ParticipantsController(Run4causeContext context)
+        public ParticipantsController(Run4causeContext context, IWebHostEnvironment hostEnvironment)
         {
             _context = context;
+            _hostEnvironment = hostEnvironment;
         }
 
         // GET: Participant
@@ -55,10 +57,20 @@ namespace run4cause.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,LastName,FirstName,Nickname,BibNumber,IsHandicapped,Gender")] Participant participant)
+        public async Task<IActionResult> Create([Bind("Id,LastName,FirstName,Nickname,BibNumber,IsHandicapped,Gender,Picture,PictureName")] Participant participant)
         {
             if (ModelState.IsValid)
             {
+                string wwwRootPath = _hostEnvironment.WebRootPath;
+                string fileName = Path.GetFileNameWithoutExtension(participant.Picture.FileName);
+                string extension = Path.GetExtension(participant.Picture.FileName);
+                participant.PictureName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                string path = Path.Combine(wwwRootPath + "/images/", fileName);
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    await participant.Picture.CopyToAsync(fileStream);
+                }
+
                 _context.Add(participant);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
