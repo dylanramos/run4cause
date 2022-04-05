@@ -25,6 +25,7 @@ namespace run4cause.Controllers
         // GET: Participant
         public async Task<IActionResult> Index()
         {
+            ViewData["popupMessage"] = ViewData["popupMessage"];
             return View(await _context.Participant.ToListAsync());
         }
 

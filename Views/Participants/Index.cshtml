@@ -6,11 +6,15 @@
 
 <h1>Index</h1>
 
-
-
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<div id="popup" class="alert alert-success alert-dismissible d-none" role="alert">
+    The operation was successfully completed
+    <a id="closePopup" class="btn btn-success px-1 py-0">&times;</a>
+</div>
+
 <table class="table">
     <thead>
         <tr>
@@ -71,3 +75,7 @@
 }
     </tbody>
 </table>
+
+@section Scripts {
+    <script src="~/js/popup.js" asp-append-version="true"></script>
+}
