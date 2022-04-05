@@ -54,6 +54,11 @@ namespace run4cause.Models
                 context.SaveChanges();
 
                 // Participations
+                if (context.Participation.Any())
+                {
+                    return;
+                }
+
                 var participations = new Participation[]
                 {
                     new Participation 
